@@ -94,14 +94,37 @@ public class Layout {
      * @param columns The number of columns, should be 4.
      * @param rows The number of rows, should be 5.
      */
-    private void fillGridPane(GridPane root, int columns, int rows) {
-        int maxIndex = Math.min(columns * rows, buttons.length);
-        for (int index = 0; index < maxIndex; index++) {
-            if (index == 17) continue; // There's no 17th button.
+//    private void fillGridPane(GridPane root, int columns, int rows) {
+//        int maxIndex = Math.min(columns * rows, buttons.length);
+//        for (int index = 0; index < maxIndex; index++) {
+//            if (index == 17) continue; // There's no 17th button.
+//
+//            String buttonText = Layout.BUTTON_KEYS[index];
+//            buttons[index] = ButtonFactory.createButton(buttonText);
+//            positionButton(root, buttons[index], index, columns);
+//        }
+//    }
 
-            String buttonText = Layout.BUTTON_KEYS[index];
-            buttons[index] = ButtonFactory.createButton(buttonText);
-            positionButton(root, buttons[index], index, columns);
+    private void fillGridPane(GridPane root, int columns, int rows) {
+        loop:
+        for (int y = 0; y < rows; ++y) {
+            for (int x = 0; x < columns; ++x) {
+                int index = y * columns + x;
+
+                if (index == 17) continue;  // There's no 17th button.
+                if (index > 19) break loop; // Also index > 19 won't work since (y+1)
+
+                String buttonText = Layout.BUTTON_KEYS[index];
+                buttons[index] = ButtonFactory.createButton(buttonText, index);
+
+                // 16th element is for the 0 button which should take two spaces horizontally instead of one
+                if (index == 16) {
+                    root.add(buttons[index], x, y + 1, 2, 1);
+                } else {
+                    root.add(buttons[index], x, y + 1);
+                }
+
+            }
         }
     }
 

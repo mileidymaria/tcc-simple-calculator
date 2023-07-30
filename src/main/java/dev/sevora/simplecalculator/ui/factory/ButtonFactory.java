@@ -9,7 +9,7 @@ public class ButtonFactory {
     private ButtonFactory() {
     }
 
-    public static Button createButton(String buttonText) {
+    public static Button createButton(String buttonText, int index) {
         Button button = new Button(buttonText);
 
         button.setFocusTraversable(false); // prevents focusing by TAB
@@ -17,7 +17,7 @@ public class ButtonFactory {
             if (hasNew) button.getParent().requestFocus();
         });
 
-        button.setId(String.format("button-%s", buttonText)); // useful for CSS, selecting individually
+        button.setId(String.format("button-%d", index)); // useful for CSS, selecting individually
         button.getStyleClass().add("button"); // useful for CSS, selecting all buttons
 
         // Maximizes the size of each cell in the grid for its element, specifically here the buttons.
