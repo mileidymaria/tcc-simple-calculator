@@ -35,7 +35,7 @@ public abstract class AbstractCalculator {
     }
 
     protected String getTreatedNumberAtSide(){
-        return getNumberAtSide().isEmpty() ? getNumberAtSide() : "0";
+        return !getNumberAtSide().isEmpty() ? getNumberAtSide() : "0";
     }
 
     /**

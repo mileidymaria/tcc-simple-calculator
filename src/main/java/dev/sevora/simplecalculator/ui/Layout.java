@@ -37,7 +37,7 @@ public class Layout {
      */
     public Layout(double width, double height) {
         gridPane = createGridPaneOfSize(4, 6);
-        gridPane.setId("root"); // This is useful for the CSS
+        gridPane.setId("root");
         gridPane.setPrefSize(width, height); 
 
         // Adds spacing on the grid.

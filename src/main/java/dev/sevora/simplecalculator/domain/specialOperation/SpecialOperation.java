@@ -38,7 +38,7 @@ public class SpecialOperation {
         if (number.indexOf('.') == -1) {
             return NumberFormatter.getSoleInstance().formatStringNumber(number) + '.';
         }
-        return "";
+        return number;
     }
 
     /**
@@ -50,7 +50,7 @@ public class SpecialOperation {
             String newValueString = String.valueOf(newValue);
             return NumberFormatter.getSoleInstance().formatStringNumber(newValueString);
         }
-        return "";
+        return number;
     }
 
     /**
@@ -62,6 +62,6 @@ public class SpecialOperation {
             String newValueString = String.valueOf(newValue);
             return NumberFormatter.getSoleInstance().formatStringNumber(newValueString);
         }
-        return "";
+        return number;
     }
 }
