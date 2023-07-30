@@ -2,29 +2,18 @@ package dev.sevora.simplecalculator.domain.specialOperation;
 
 import dev.sevora.simplecalculator.domain.NumberFormatter;
 
-public class SpecialOperationImpl {
+public class SpecialOperation {
 
-    private static SpecialOperationImpl soleInstance;
+    private static SpecialOperation soleInstance;
 
-    private SpecialOperationImpl(){
+    private SpecialOperation(){
     }
 
-    public static SpecialOperationImpl getSoleInstance(){
+    public static SpecialOperation getSoleInstance(){
         if(soleInstance == null){
-            soleInstance = new SpecialOperationImpl();
+            soleInstance = new SpecialOperation();
         }
         return soleInstance;
-    }
-
-
-    /**
-     * Use to clear the whole state
-     * of the calculator.
-     */
-    public void clear(String left, String right, String operation) {
-        left = "";
-        right = "";
-        operation = "";
     }
 
     /**
@@ -49,7 +38,7 @@ public class SpecialOperationImpl {
         if (number.indexOf('.') == -1) {
             return NumberFormatter.getSoleInstance().formatStringNumber(number) + '.';
         }
-        return null;
+        return "";
     }
 
     /**
@@ -61,7 +50,7 @@ public class SpecialOperationImpl {
             String newValueString = String.valueOf(newValue);
             return NumberFormatter.getSoleInstance().formatStringNumber(newValueString);
         }
-        return null;
+        return "";
     }
 
     /**
@@ -73,6 +62,6 @@ public class SpecialOperationImpl {
             String newValueString = String.valueOf(newValue);
             return NumberFormatter.getSoleInstance().formatStringNumber(newValueString);
         }
-        return null;
+        return "";
     }
 }

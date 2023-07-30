@@ -1,4 +1,4 @@
-package dev.sevora.simplecalculator.domain;
+package dev.sevora.simplecalculator.domain.operation;
 
 public class Addition implements Operation {
     @Override

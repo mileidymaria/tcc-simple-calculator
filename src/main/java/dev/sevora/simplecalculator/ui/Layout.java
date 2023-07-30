@@ -1,16 +1,17 @@
-package dev.sevora.simplecalculator;
+package dev.sevora.simplecalculator.ui;
 
+import dev.sevora.simplecalculator.ui.factory.ButtonFactory;
 import javafx.animation.PauseTransition;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.util.Duration;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 
 /**
  * The layout for the GUI of the application.
@@ -34,7 +35,7 @@ public class Layout {
      * @param width The width of the layout.
      * @param height The height of the layout.
      */
-    Layout(double width, double height) {
+    public Layout(double width, double height) {
         gridPane = createGridPaneOfSize(4, 6);
         gridPane.setId("root"); // This is useful for the CSS
         gridPane.setPrefSize(width, height); 
@@ -94,43 +95,28 @@ public class Layout {
      * @param rows The number of rows, should be 5.
      */
     private void fillGridPane(GridPane root, int columns, int rows) {
-        loop:
-        for (int y = 0; y < rows; ++y) {
-            for (int x = 0; x < columns; ++x) {
-                int index = y * columns + x;
+        int maxIndex = Math.min(columns * rows, buttons.length);
+        for (int index = 0; index < maxIndex; index++) {
+            if (index == 17) continue; // There's no 17th button.
 
-                if (index == 17) continue;  // There's no 17th button.
-                if (index > 19) break loop; // Also index > 19 won't work since (y+1)
-
-                buttons[index] = new Button(Layout.BUTTON_KEYS[index]);
-                Button button = buttons[index];
-
-                button.setFocusTraversable(false); // prevents focusing by TAB
-                // This event handling makes it so that it doesn't focus on other nodes.
-                button.focusedProperty().addListener((observable, old, hasNew) -> { 
-                    if (hasNew) gridPane.requestFocus();
-                });
-
-                button.setId(String.format("button-%d", index)); // useful for CSS, selecting individually
-                button.getStyleClass().add("button");            // useful for CSS, selecting all buttons
-
-                // Maximizes the size of each cell in the grid for its element, specifically here the buttons.
-                GridPane.setHgrow(button, Priority.ALWAYS);
-                GridPane.setVgrow(button, Priority.ALWAYS);
-                
-                // This makes the button take the max size of its container.
-                button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-                
-                // 16th element is for the 0 button which should take two spaces horizontally instead of one
-                if (index == 16) {
-                    root.add(button, x, y + 1, 2, 1);
-                } else {
-                    root.add(button, x, y + 1);
-                }
-
-            }
+            String buttonText = Layout.BUTTON_KEYS[index];
+            buttons[index] = ButtonFactory.createButton(buttonText);
+            positionButton(root, buttons[index], index, columns);
         }
     }
+
+    private void positionButton(GridPane root, Button button, int index, int columns) {
+        int x = index % columns;
+        int y = index / columns + 1;
+
+        // 16th element is for the 0 button which should take two spaces horizontally instead of one
+        if (index == 16) {
+            root.add(button, x, y, 2, 1);
+        } else {
+            root.add(button, x, y);
+        }
+    }
+
 
     /**
      * Getter for the label of the GUI.

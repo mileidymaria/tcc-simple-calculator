@@ -19,6 +19,7 @@
     <javafx.version>11.0.2</javafx.version>
     <javafx.plugin.version>0.0.4</javafx.plugin.version>
     <main.class>dev.sevora.simplecalculator.Main</main.class>
+    <jqassistant.version>1.9.1</jqassistant.version>
   </properties>
 
   <dependencies>
@@ -98,6 +99,10 @@
   <build>
     <plugins>
       <plugin>
+        <groupId>com.buschmais.jqassistant</groupId>
+        <artifactId>jqassistant-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
         <groupId>org.openjfx</groupId>
         <artifactId>javafx-maven-plugin</artifactId>
         <version>${javafx.plugin.version}</version>
@@ -168,6 +173,24 @@
         <plugin>
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.0.0</version>
+        </plugin>
+        <plugin>
+          <groupId>com.buschmais.jqassistant</groupId>
+          <artifactId>jqassistant-maven-plugin</artifactId>
+          <version>${jqassistant.version}</version>
+          <executions>
+            <execution>
+              <id>default-cli</id>
+              <goals>
+                <goal>scan</goal>
+                <goal>analyze</goal>
+              </goals>
+              <configuration>
+                <warnOnSeverity>INFO</warnOnSeverity>
+                <failOnSeverity>MAJOR</failOnSeverity>
+              </configuration>
+            </execution>
+          </executions>
         </plugin>
       </plugins>
     </pluginManagement>
