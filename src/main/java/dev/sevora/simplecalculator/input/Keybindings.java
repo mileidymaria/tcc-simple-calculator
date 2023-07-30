@@ -1,12 +1,13 @@
-package dev.sevora.simplecalculator;
-
-import java.util.Map;
-import static java.util.Map.entry;
+package dev.sevora.simplecalculator.input;
 
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+
+import java.util.Map;
+
+import static java.util.Map.entry;
 
 /**
  * Keybinding is a class meant to be used statically, it should hold
