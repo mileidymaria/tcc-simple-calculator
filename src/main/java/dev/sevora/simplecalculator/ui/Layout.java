@@ -100,12 +100,11 @@ public class Layout {
             for (int x = 0; x < columns; ++x) {
                 int index = y * columns + x;
 
-                if (index == 17) continue;  // There's no 17th button.
-                if (index > 19) break loop; // Also index > 19 won't work since (y+1)
+                if (index == 17) continue;
+                if (index > 19) break loop;
 
                 String buttonText = Layout.BUTTON_KEYS[index];
                 buttons[index] = ButtonFactory.createButton(buttonText, index);
-                // 16th element is for the 0 button which should take two spaces horizontally instead of one
                 if (index == 16) {
                     root.add(buttons[index], x, y + 1, 2, 1);
                 } else {
