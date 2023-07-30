@@ -60,7 +60,7 @@ public class Layout {
         scene = new Scene(gridPane);
         
         // CSS can be found on the path specified
-        scene.getStylesheets().add(getClass().getResource("resources/stylesheet.css").toExternalForm());
+        scene.getStylesheets().add("stylesheet.css");
     }
 
     /**
